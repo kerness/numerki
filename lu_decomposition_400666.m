@@ -5,10 +5,20 @@
 
 
 
-A = input ('Enter the matrix <e.g. [1 1; 1 1; 1 1]>: ');    % matrix input
-matrixSize = size(A);                                       % set matrx size
-U = zeros(matrixSize);                                      % U matrix declaration
-L = zeros(matrixSize);                                      % L matrix declaration
+A = input ('Enter square matrix <e.g. [1 1; 1 1;]>: ');                     % first matrix input
+% square matrix check. If successful - LU Decomposition main loop
+[nRow, nCol] = size(A);                                                     % number of col and row                                  
+if nRow ~= nCol
+    while (nRow ~= nCol)                                                    % to get the right input (square matrix)
+        disp('Decomposition impossible. Input square matrix.');
+        A = input ('Enter square matrix <e.g. [1 1; 1 1;]>: ');
+        [nRow, nCol] = size(A);  
+    end
+end
+
+matrixSize = nRow;                                                          % set matrx size (nRow == nCol)
+U = zeros(matrixSize);                                                      % U matrix declaration
+L = zeros(matrixSize);                                                      % L matrix declaration
 
 % LU Decomposition main loop
 for i = 1:matrixSize
